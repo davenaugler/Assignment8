@@ -4,8 +4,6 @@ lib*
 *.iml
 out/
 *target
-target*
-target/
 
 
 !**/src/main/**/out/

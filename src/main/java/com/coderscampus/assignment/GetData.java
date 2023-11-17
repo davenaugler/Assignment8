@@ -42,4 +42,26 @@ public class GetData {
                 });
 
     }
+//        Assignment8 assignment = new Assignment8();
+//        ExecutorService executor = Executors.newFixedThreadPool(10); // Using 10 threads for example
+//
+//        List<Future<List<Integer>>> futures = new ArrayList<>();
+//
+//        for (int i = 0; i < 1000; i++) {
+//            futures.add(executor.submit(assignment::getNumbers));
+//        }
+//
+//        executor.shutdown();
+//        executor.awaitTermination(1, TimeUnit.HOURS);
+//
+//        ConcurrentHashMap<Integer, Long> frequencyMap = new ConcurrentHashMap<>();
+//        for (Future<List<Integer>> future : futures) {
+//            List<Integer> numbers = future.get();
+//            for (Integer number : numbers) {
+//                frequencyMap.compute(number, (key, val) -> (val == null) ? 1 : val + 1);
+//            }
+//        }
+//
+//        frequencyMap.forEach((key, value) -> System.out.println(key + "=" + value));
+//    }
 }

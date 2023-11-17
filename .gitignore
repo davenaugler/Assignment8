@@ -3,7 +3,9 @@
 lib*
 *.iml
 out/
-target
+*target
+target*
+target/
 
 
 !**/src/main/**/out/

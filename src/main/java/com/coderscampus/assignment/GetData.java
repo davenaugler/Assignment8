@@ -16,25 +16,18 @@ public class GetData {
 
         // Optimize the thread pool size based on your system and task nature
         int numberOfCores = Runtime.getRuntime().availableProcessors();
-        int poolSize = numberOfCores * 20; // Started out as... int poolSize = numberOfCores * 2;
+        int poolSize = numberOfCores * 100;
         ExecutorService executor = Executors.newFixedThreadPool(poolSize);
 
         List<CompletableFuture<List<Integer>>> futures = new ArrayList<>();
-
-        // Assuming getNumbers() needs to be called 1000 times
-//            for (int count = 0; count < 1000; count++) {
-//                CompletableFuture<List<Integer>> future = CompletableFuture.supplyAsync(assignment8::getNumbers, executor);
-//                futures.add(future);
-//            }
 
         for (int count = 0; count < 1000; count++) {
             CompletableFuture<List<Integer>> future = CompletableFuture.supplyAsync(() -> {
                 try {
                     return assignment8.getNumbers();
                 } catch (Exception e) {
-                    // Handle any exceptions here
                     e.printStackTrace();
-                    return new ArrayList<Integer>(); // Return an empty list in case of error
+                    return new ArrayList<>(); // Return an empty list in case of error
                 }
             }, executor);
             futures.add(future);
@@ -87,12 +80,23 @@ public class GetData {
         // Total execution time: 50 seconds and 562 milliseconds
         // Total execution time: 50 seconds and 562 milliseconds
 
-        // ? Times below are WITH USER COMPUTER SPECS
+        // Optimize the thread pool size based on your system and task nature
+        // ? Optimize the thread pool size based on user computer spec (* 2)
         // Total execution time: 25 seconds and 342 milliseconds
         // Total execution time: 25 seconds and 343 milliseconds
 
-        // ? Times below are WITH USER COMPUTER SPECS * 20
+        // ? Optimize the thread pool size based on user computer spec (* 20)
+        // Total execution time: 2 seconds and 675 milliseconds
+        // Total execution time: 2 seconds and 704 milliseconds
 
+        // ? Optimize the thread pool size based on user computer spec (* 30)
+        // Total execution time: 2 seconds and 178 milliseconds
+        // Total execution time: 2 seconds and 183 milliseconds
+
+
+        // ? Optimize the thread pool size based on user computer spec (* 50)
+        // Total execution time: 1 seconds and 190 milliseconds
+        // Total execution time: 1 seconds and 223 milliseconds
 
     }
 

@@ -27,7 +27,7 @@ public class GetData {
                     return assignment8.getNumbers();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return new ArrayList<>(); // Return an empty list in case of error
+                    return new ArrayList<>();
                 }
             }, executor);
             futures.add(future);
@@ -39,38 +39,31 @@ public class GetData {
                 .collect(Collectors.toList())
         );
 
-        // Get the combined result
         List<List<Integer>> allNumbers = allNumbersFuture.get();
 
-        // Count the frequency of each number
         ConcurrentHashMap<Integer, Integer> numberFrequencies = new ConcurrentHashMap<>();
         for (List<Integer> numberList : allNumbers) {
             for (Integer number : numberList) {
                 numberFrequencies.merge(number, 1, Integer::sum);
-//                numberFrequencies.put(number, numberFrequencies.getOrDefault(number, 0) + 1);
             }
         }
 
-        // Output the frequencies
         numberFrequencies.forEach((number, frequency) -> {
             System.out.println(number + " : " + frequency);
         });
 
-        // Proper shutdown and handling of the executor
         executor.shutdown();
         if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
             executor.shutdownNow();
         }
 
         long endTime = System.currentTimeMillis(); // * STOP TIMER
-//        long totalTime = endTime - startTime;
 
         // * CALCULATE SECONDS
         long totalTimeMillis = endTime - startTime;
         long totalTimeSeconds = totalTimeMillis / 1_000;
         long remainingMillis = totalTimeMillis % 1_000;
 
-//        System.out.println("Total execution time: " + totalTime + " milliseconds");
         System.out.println("Total execution time: " + totalTimeSeconds + " seconds and " + remainingMillis + " milliseconds");
         // ? Times below are WITHOUT multithreading
         // Total execution time: 56 seconds and 531 milliseconds
@@ -98,6 +91,9 @@ public class GetData {
         // Total execution time: 1 seconds and 190 milliseconds
         // Total execution time: 1 seconds and 223 milliseconds
 
+        // ? Optimize the thread pool size based on user computer spec (* 50)
+        // Total execution time: 0 seconds and 734 milliseconds
+        // Total execution time: 0 seconds and 697 milliseconds
     }
 
 }

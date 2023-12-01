@@ -15,8 +15,6 @@ public class Assignment8 {
 
     public Assignment8() {
         try {
-            // Make sure you download the output.txt file for Assignment 8
-            // and place the file in the root of your Java project
             numbers = Files.readAllLines(Paths.get("output.txt"))
                     .stream()
                     .map(n -> Integer.parseInt(n))
@@ -26,14 +24,6 @@ public class Assignment8 {
         }
     }
 
-    /**
-     * This method will return the numbers that you'll need to process from the list
-     * of Integers. However, it can only return 1000 records at a time. You will
-     * need to call this method 1,000 times in order to retrieve all 1,000,000
-     * numbers from the list
-     * 
-     * @return Integers from the parsed txt file, 1,000 numbers at a time
-     */
     public List<Integer> getNumbers() {
         int start, end;
         synchronized (i) {
@@ -42,8 +32,7 @@ public class Assignment8 {
 
             System.out.println("Starting to fetch records " + start + " to " + (end));
         }
-        // force thread to pause for half a second to simulate actual Http / API traffic
-        // delay
+
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
